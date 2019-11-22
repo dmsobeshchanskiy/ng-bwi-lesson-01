@@ -7,6 +7,7 @@ import { HistoryComponent } from './gui/history/history.component';
 import { InputComponent } from './gui/input/input.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { WeightAnalyzerService } from './weight-analyzer/weight-analyzer.service';
+import { HistoryService } from './history-service/history.service';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { WeightAnalyzerService } from './weight-analyzer/weight-analyzer.service
     AppRoutingModule,
     ReactiveFormsModule
   ],
-  providers: [WeightAnalyzerService],
+  providers: [WeightAnalyzerService, HistoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

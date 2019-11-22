@@ -4,6 +4,7 @@ import { Validators } from '@angular/forms';
 import { WeightAnalyzerService } from '../../weight-analyzer/weight-analyzer.service';
 import { WeightAnalyzerInput } from '../../weight-analyzer/weight-analyzer-input';
 import { WeightAnalyzerResponse } from '../../weight-analyzer/weight-analyzer-response';
+import { HistoryService } from '../../history-service/history.service';
 
 @Component({
    selector: 'app-input',
@@ -18,7 +19,7 @@ export class InputComponent implements OnInit {
       weight: new FormControl('', Validators.required)
    });
 
-   constructor(private analyzer: WeightAnalyzerService) { }
+   constructor(private analyzer: WeightAnalyzerService, private historyService: HistoryService) { }
 
    ngOnInit() {
    }
@@ -27,6 +28,7 @@ export class InputComponent implements OnInit {
       const inputData = this.prepareInputData();
       const response = this.analyzer.analyze(inputData);
       this.displayResponse(response);
+      this.addRecordToHistory(inputData, response);
       this.inputForm.reset();
    }
 
@@ -47,6 +49,17 @@ export class InputComponent implements OnInit {
          message = `Weight deviation is: ${response.weightDeviation} kg / ${response.weightDeviationPercentage} %`;
       }
       alert(message);
+   }
+
+   private addRecordToHistory(inputData: WeightAnalyzerInput, response: WeightAnalyzerResponse) {
+      const record = {
+         height: inputData.height,
+         weight: inputData.weight,
+         age: inputData.age,
+         weightDeviation: response.weightDeviation,
+         weightDeviationPercentage: response.weightDeviationPercentage
+      };
+      this.historyService.addRecordToStorage(record);
    }
 
 }
