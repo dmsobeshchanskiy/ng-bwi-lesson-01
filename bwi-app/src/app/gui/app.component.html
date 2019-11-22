@@ -1,2 +1,7 @@
 <app-input></app-input>
-<app-history></app-history>
+<div>
+   <button (click)="onHistoryClick()">{{historyButtonCaption}}</button>
+</div>
+<div>
+   <app-history *ngIf="showHistory"></app-history>
+</div>

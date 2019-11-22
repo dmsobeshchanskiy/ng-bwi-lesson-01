@@ -40,12 +40,13 @@ export class InputComponent implements OnInit {
    }
 
    private displayResponse(response: WeightAnalyzerResponse) {
+      let message = '';
       if (response.occuredError && response.occuredError.length > 0) {
-
+         message = `Analyze fails with error ${response.occuredError}`;
       } else {
-         const alertMessage = `Weight deviation is: ${response.weightDeviation} kg / ${response.weightDeviationPercentage} %`;
-         alert(alertMessage);
+         message = `Weight deviation is: ${response.weightDeviation} kg / ${response.weightDeviationPercentage} %`;
       }
+      alert(message);
    }
 
 }

@@ -6,5 +6,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'bwi-app';
+
+   public showHistory = false;
+
+   get historyButtonCaption(): string {
+      return this.showHistory ? 'Hide history' : 'Show history';
+   }
+
+   onHistoryClick() {
+      this.showHistory = !this.showHistory;
+   }
 }
