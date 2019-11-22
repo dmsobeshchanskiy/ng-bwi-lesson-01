@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './gui/app.component';
 import { HistoryComponent } from './gui/history/history.component';
 import { InputComponent } from './gui/input/input.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { WeightAnalyzerService } from './weight-analyzer/weight-analyzer.service';
 
 @NgModule({
   declarations: [
@@ -14,9 +16,10 @@ import { InputComponent } from './gui/input/input.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [WeightAnalyzerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

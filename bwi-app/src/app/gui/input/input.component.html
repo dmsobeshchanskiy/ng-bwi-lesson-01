@@ -1,6 +1,27 @@
 <div>
-  <p>Weight analyzer</p>
+   <p>Weight analyzer</p>
 </div>
 <div>
-  
+   <form [formGroup]="inputForm" (ngSubmit)="onInputSubmit()">
+
+      <label>
+         Your Age:
+         <input type="text" formControlName="age">
+      </label>
+
+      <label>
+         Your Height:
+         <input type="text" formControlName="height">
+      </label>
+
+      <label>
+         Your Weight:
+         <input type="text" formControlName="weight">
+      </label>
+
+      <div>
+         <button type ="submit" [disabled]="!inputForm.valid">Analyze!</button>
+      </div>
+
+   </form>
 </div>
