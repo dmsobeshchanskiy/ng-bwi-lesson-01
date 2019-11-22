@@ -2,14 +2,14 @@
   ANALYZE HISTORY
 </h4>
 <table *ngIf="historyExist">
-   <tr>
+   <tr class="headerRow">
       <th>Height, cm</th>
       <th>Weight, kg</th>
       <th>Age, years</th>
       <th>Weight Deviation, kg</th>
       <th>Weight Deviation, %</th>
    </tr>
-   <tr *ngFor="let record of records">
+   <tr *ngFor="let record of records" class="usualRow">
       <td>{{record.height}}</td>
       <td>{{record.weight}}</td>
       <td>{{record.age}}</td>

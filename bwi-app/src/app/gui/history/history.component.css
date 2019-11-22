@@ -1,0 +1,14 @@
+table {
+   border: 1px solid #ccc;
+   border-collapse: collapse;
+}
+tr {
+   border: 1px solid #ccc;
+   border-collapse: collapse;
+}
+.usualRow:nth-child(odd) { background-color: rgb(180, 234, 255); }
+td, th {
+   border: 1px solid #ccc;
+   text-align: center;
+   border-collapse: collapse;
+}
