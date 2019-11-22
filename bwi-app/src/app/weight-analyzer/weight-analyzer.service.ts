@@ -15,7 +15,7 @@ export class WeightAnalyzerService {
       response.occuredError = error;
     } else {
       const perfectWeight = this.calcPerfectWeight(input);
-      response.weightDeviation = input.weight - perfectWeight;
+      response.weightDeviation = Math.round(input.weight - perfectWeight);
       response.weightDeviationPercentage = Math.round((input.weight - perfectWeight) * 100 / perfectWeight);
     }
 

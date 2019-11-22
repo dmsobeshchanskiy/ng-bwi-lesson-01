@@ -1,10 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
-import { WeightAnalyzerService } from '../../weight-analyzer/weight-analyzer.service';
 import { WeightAnalyzerInput } from '../../weight-analyzer/weight-analyzer-input';
-import { WeightAnalyzerResponse } from '../../weight-analyzer/weight-analyzer-response';
-import { HistoryService } from '../../history-service/history.service';
+
 
 @Component({
    selector: 'app-input',
@@ -13,22 +11,22 @@ import { HistoryService } from '../../history-service/history.service';
 })
 export class InputComponent implements OnInit {
 
+   @Output() analyzeRequired = new EventEmitter<WeightAnalyzerInput>();
+
    inputForm = new FormGroup({
       age: new FormControl('', Validators.required),
       height: new FormControl('', Validators.required),
       weight: new FormControl('', Validators.required)
    });
 
-   constructor(private analyzer: WeightAnalyzerService, private historyService: HistoryService) { }
+   constructor() { }
 
    ngOnInit() {
    }
 
    onInputSubmit() {
       const inputData = this.prepareInputData();
-      const response = this.analyzer.analyze(inputData);
-      this.displayResponse(response);
-      this.addRecordToHistory(inputData, response);
+      this.analyzeRequired.emit(inputData);
       this.inputForm.reset();
    }
 
@@ -39,27 +37,6 @@ export class InputComponent implements OnInit {
       inputData.height = this.inputForm.value.height;
       inputData.weight = this.inputForm.value.weight;
       return inputData;
-   }
-
-   private displayResponse(response: WeightAnalyzerResponse) {
-      let message = '';
-      if (response.occuredError && response.occuredError.length > 0) {
-         message = `Analyze fails with error ${response.occuredError}`;
-      } else {
-         message = `Weight deviation is: ${response.weightDeviation} kg / ${response.weightDeviationPercentage} %`;
-      }
-      alert(message);
-   }
-
-   private addRecordToHistory(inputData: WeightAnalyzerInput, response: WeightAnalyzerResponse) {
-      const record = {
-         height: inputData.height,
-         weight: inputData.weight,
-         age: inputData.age,
-         weightDeviation: response.weightDeviation,
-         weightDeviationPercentage: response.weightDeviationPercentage
-      };
-      this.historyService.addRecordToStorage(record);
    }
 
 }
